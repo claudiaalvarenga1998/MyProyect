@@ -1,0 +1,30 @@
+{% extends '../gestionCursos.html' %}
+
+
+{% block content %}
+<div class="rigth_col" role="main">
+    <h1 >Listar Cursos</h1>
+    <table class="table ">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for u in cursos %}
+          <tr>
+            <td>{{ u.id}}</td>
+            <td>{{ u.nombre }}</td>
+            <td>{{ u.descripcion }}</td>
+            <td>{{ u.estado }}</td>
+          </tr>
+          {% endfor %}  
+          
+        </tbody>
+      
+      </table>
+ </div>
+{% endblock %}

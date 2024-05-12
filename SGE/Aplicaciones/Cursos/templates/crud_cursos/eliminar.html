@@ -1,0 +1,127 @@
+{% extends '../gestionCursos.html' %}
+
+{% block content %}
+
+<div class="rigth_col" role="main">
+    <h1 >Eliminar Curso</h1>
+    
+    <form action="eliminar" method="post">
+        {% csrf_token %}
+        <div class="form-group row">
+          <label for="id" class="col-4 col-form-label">Nro.</label> 
+          <div class="col-8">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <i class="fa fa-list-alt"></i>
+                </div>
+              </div> 
+                <select id="id"  name="id" >
+                {% for u in cursos %}
+                    <option value="{{u.id}}">{{ u.id }} - {{ u.nombre }}</option>
+                {% endfor %}
+                </select>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+            <div class="offset-4 col-8">
+              <button name="submit" type="submit" class="btn btn-danger"><i class = 'fa fa-trash'></i>Eliminar</button>
+            </div>
+          </div>
+        </form>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Estado</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for curso in cursos %}
+                            <tr>
+                                <td>{{ curso.id }}</td>
+                                <td>{{ curso.nombre }}</td>
+                                <td>{{ curso.descripcion }}</td>
+                                <td>{{ curso.estado }}</td>
+                                <td>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="{{ curso.id }}">
+                                        <i class="fa fa-trash"></i> Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Delete Modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Eliminar Curso</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Estás seguro de que deseas eliminar el curso?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <form action="eliminar" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="id" id="idDelete">
+                            <button type="submit" class="btn btn-danger"><i class = 'fa fa-trash'></i>Eliminar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Search Bar -->
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Buscar curso por ID" id="searchInput">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="searchButton">Buscar</button>
+            </div>
+        </div>
+        <script>
+            // Search Function
+            $("#searchButton").click(function() {
+                var input = $("#searchInput").val();
+                $("tbody tr").each(function() {
+                    if ($(this).find("td:eq(0)").text()!= input) {
+                        $(this).hide();
+                    } else {
+                        $(this).show();
+                    }
+                });
+            });
+        </script>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $('#deleteModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var id = button.data('id')
+        var modal = $(this)
+        modal.find('.modal-body').text('¿Estás seguro de que deseas eliminar el curso con ID ' + id + '?')
+        modal.find('#idDelete').val(id)
+    })
+    // Delete Function
+    $(".btn-danger").click(function() {
+        var id = $(this).data('id');
+        $("#idDelete").val(id);
+        $("#deleteModal").modal('show');
+    });
+</script>
+{% endblock %}

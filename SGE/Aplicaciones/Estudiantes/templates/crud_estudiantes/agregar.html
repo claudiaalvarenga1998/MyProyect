@@ -1,0 +1,144 @@
+{% extends '../gestionEstudiantes.html' %}
+
+{% block content %}
+
+<div style="text-indent: 30px" role="main">
+    <h1 > Agregar Estudiantes</h1>
+
+    <form action="agregar" method="post">
+        {% csrf_token %}
+        <div class="form-group row">
+          <label for="ci" class="col-4 col-form-label">Nro. de CI</label>
+          <div class="col-8">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <i class="fa fa-id-card"></i>
+                </div>
+              </div>
+              <input id="ci" name="ci" type="text" class="form-control" required="required">
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="nombres" class="col-4 col-form-label">Nombres</label>
+          <div class="col-8">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <i class="fa fa-user-circle"></i>
+                </div>
+              </div>
+              <input id="nombres" name="nombres" type="text" class="form-control" required="required">
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="apellidos" class="col-4 col-form-label">Apellidos</label>
+          <div class="col-8">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <i class="fa fa-user-circle"></i>
+                </div>
+              </div>
+              <input id="apellidos" name="apellidos" type="text" class="form-control" required="required">
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="email" class="col-4 col-form-label">Correo</label>
+          <div class="col-8">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <i class="fa fa-inbox"></i>
+                </div>
+              </div>
+              <input id="email" name="email" type="email" required="required" class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="telefono" class="col-4 col-form-label">Teléfono</label>
+          <div class="col-8">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <i class="fa fa-phone"></i>
+                </div>
+              </div>
+              <input id="telefono" name="telefono" type="number" required="required" class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="fecha_nac" class="col-4 col-form-label">Fecha de Nacimiento</label>
+          <div class="col-8">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <i class="fa fa-calendar"></i>
+                </div>
+              </div>
+              <input id="fecha_nac" name="fecha_nac" type="date" class="form-control" required="required">
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="direccion" class="col-4 col-form-label">Dirección</label>
+          <div class="col-8">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <i class="fa fa-home"></i>
+                </div>
+              </div>
+              <input id="direccion" name="direccion" type="text" class="form-control" required="required">
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="sexo" class="col-4 col-form-label">Sexo</label>
+          <div class="col-8">
+            <select id="sexo" name="sexo" class="custom-select" required="required">
+              <option value="">Seleccione</option>
+              <option value="M">Masculino</option>
+              <option value="F">Femenino</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-4">Estado</label> 
+          <div class="col-8">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input name="estado" id="estado_0" type="radio" class="custom-control-input" value="True" checked="checked"> 
+              <label for="estado_0" class="custom-control-label">Activo</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input name="estado" id="estado_1" type="radio" class="custom-control-input" value="False"> 
+              <label for="estado_1" class="custom-control-label">Inactivo</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="grado" class="col-4 col-form-label">Grado</label>
+          <div class="col-8">
+            <select id="curso" name="curso" class="custom-select" required="required">
+              <option value="">Seleccione</option>
+              {% for curso in cursos %}
+                <option value="{{ curso.id }}">{{ curso.nombre }}</option>
+              {% empty %}
+                <option value="">No hay cursos disponibles</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="offset-4 col-8">
+            <button name="submit" type="submit" class="btn btn-primary">Agregar</button>
+          </div>
+        </div>
+    </form>
+</main>
+{% endblock %}

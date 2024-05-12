@@ -1,0 +1,42 @@
+{% extends '../gestionEstudiantes.html' %}
+
+
+{% block content %}
+<div class="rigth_col" role="main">
+    <h1 >Listar Estudiantes</h1>
+    <table class="table ">
+        <thead>
+          <tr>
+            <th scope="col">CI</th>
+            <th scope="col">Nombres</th>
+            <th scope="col">Apellidos</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Teléfono</th>
+            <th scope="col">Fecha de Nacimiento</th>
+            <th scope="col">Dirección</th>
+            <th scope="col">Sexo</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Curso</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          {% for u in estudiantes %}
+            <tr>
+              <td>{{ u.ci.ci }}</td>
+              <td>{{ u.ci.nombres }}</td>
+              <td>{{ u.ci.apellidos }}</td>
+              <td>{{ u.ci.email }}</td>
+              <td>{{ u.ci.telefono }}</td>
+              <td>{{ u.ci.fecha_nacimiento }}</td>
+              <td>{{ u.ci.direccion }}</td>
+              <td>{{ u.ci.sexo }}</td>
+              <td>{{ u.ci.estado }}</td>
+              <td>{{ u.curso.nombre }}</td>
+            </tr>
+          {% endfor %}  
+        </tbody>
+      
+      </table>
+ </div>
+{% endblock %}

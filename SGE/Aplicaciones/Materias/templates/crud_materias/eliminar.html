@@ -1,0 +1,37 @@
+{% extends '../gestionMaterias.html' %}
+
+{% block content %}
+
+<div class="rigth_col" role="main">
+    <h1 >Eliminar Materias</h1>
+    
+    <form action="eliminar" method="post">
+        {% csrf_token %}
+        <div class="form-group row">
+          <label for="ci" class="col-4 col-form-label">Nro.</label> 
+          <div class="col-8">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <i class="fa fa-list-alt"></i>
+                </div>
+              </div> 
+                <select id="id"  name="id" >
+                {% for u in materias %}
+                
+                    <option value="{{u.id}}">{{ u.id }}</option>
+                
+                {% endfor %}
+                </select>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+            <div class="offset-4 col-8">
+              <button name="submit" type="submit" class="btn btn-danger"><i class = 'fa fa-trash'></i>Eliminar</button>
+            </div>
+          </div>
+        </form>
+ </div>
+
+{% endblock %}

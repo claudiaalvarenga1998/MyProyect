@@ -1,0 +1,77 @@
+{% extends '../gestionMaterias.html' %}
+
+{% block content %}
+<div class="rigth_col" role="main">
+    <h1 >Actualizar Materias </h1>
+
+    <form action="actualizar" method="post">
+        {% csrf_token %}
+        <div class="form-group row">
+          <label for="id" class="col-4 col-form-label">Nro. de ID</label> 
+          <div class="col-8">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <i class="fa fa-id-badge"></i>
+                </div>
+              </div> 
+                <select id="id"  name="id" >
+                {% for u in materias %}
+                
+                    <option value="{{u.id}}">{{ u.id }}</option>
+                
+                {% endfor %}
+                </select>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="nombre" class="col-4 col-form-label">Nombre</label> 
+          <div class="col-8">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <i class="fa fa-list-alt"></i>
+                </div>
+              </div> 
+              <input id="nombre" name="nombre" type="text" class="form-control" required="required">
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="descripcion" class="col-4 col-form-label">Descripción</label> 
+          <div class="col-8">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <i class="fa fa-list-alt"></i>
+                </div>
+              </div> 
+              <input id="descripcion" name="descripcion" type="text" class="form-control" required="required">
+            </div>
+          </div>
+        </div>
+  
+        <div class="form-group row">
+          <label class="col-4">Estado</label> 
+          <div class="col-8">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input name="estado" id="estado_0" type="radio" class="custom-control-input" value="True" checked="checked"> 
+              <label for="estado_0" class="custom-control-label">Activo</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input name="estado" id="estado_1" type="radio" class="custom-control-input" value="False"> 
+              <label for="estado_1" class="custom-control-label">Inactivo</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="offset-4 col-8">
+            <button name="submit" type="submit" class="btn btn-primary">Actualizar</button>
+          </div>
+        </div>
+      </form>
+ </div>
+
+
+{% endblock %}
